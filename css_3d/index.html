@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CSS 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .cuboid__face {
+        box-sizing: border-box;
+        border: 1px solid black;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import { createScene, renderCuboid } from './index.js'
+      import { Cuboid } from '../index.js'
+
+      const width = 100
+      const length = 100
+      const height = 100
+      const $scene = createScene()
+      $scene.style.width = `${2 * length}px`
+      $scene.style.height = `${2 * width}px`
+
+      const $group = document.createElement('div')
+      $group.classList.add('group')
+      $group.style.position = 'absolute'
+      $group.style.transformStyle = 'preserve-3d'
+      $group.style.transform = 'rotateY(45deg)'
+      $scene.appendChild($group)
+
+      const size = {
+        width,
+        length,
+        height
+      }
+
+      const cuboid1 = new Cuboid({
+        size,
+        position: {
+          x: 0,
+          y: 0,
+          z: 0
+        }
+      })
+      const $cuboid1 = renderCuboid(cuboid1)
+      $group.appendChild($cuboid1)
+
+      const cuboid2 = new Cuboid({
+        size,
+        position: {
+          x: 1 * length,
+          y: 0,
+          z: 0
+        }
+      })
+      const $cuboid2 = renderCuboid(cuboid2)
+      $group.appendChild($cuboid2)
+
+      const cuboid3 = new Cuboid({
+        size,
+        position: {
+          x: 0,
+          y: 1 * width,
+          z: 0
+        }
+      })
+      const $cuboid3 = renderCuboid(cuboid3)
+      $group.appendChild($cuboid3)
+
+      const cuboid4 = new Cuboid({
+        size,
+        position: {
+          x: 0,
+          y: 0,
+          z: 1 * height
+        }
+      })
+      const $cuboid4 = renderCuboid(cuboid4)
+      $group.appendChild($cuboid4)
+
+      document.body.appendChild($scene)
+    </script>
+  </body>
+</html>

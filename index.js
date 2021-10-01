@@ -14,7 +14,7 @@ class GeometricObject {
   }
 }
 
-class Cuboid extends GeometricObject {
+export class Cuboid extends GeometricObject {
 
 }
 
